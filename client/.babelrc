@@ -1,8 +1,8 @@
 {
-  "presets": ["react-native"],
-  "env": {
-    "production": {
-      "plugins": ["ignite-ignore-reactotron"]
-    }
-  }
+	"presets": ["babel-preset-expo"],
+	"env": {
+		"development": {
+			"plugins": ["transform-react-jsx-source"]
+		}
+	}
 }
