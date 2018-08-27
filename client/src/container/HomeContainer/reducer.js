@@ -4,13 +4,13 @@ const initialState = {
 };
 
 export default function(state: any = initialState, action: Function) {
-	if (action.type === "FETCH_LIST_SUCCESS") {
+	if (action.type === 'FETCH_LIST_SUCCESS') {
 		return {
 			...state,
 			list: action.list,
 		};
 	}
-	if (action.type === "LIST_IS_LOADING") {
+	if (action.type === 'LIST_IS_LOADING') {
 		return {
 			...state,
 			isLoading: action.isLoading,

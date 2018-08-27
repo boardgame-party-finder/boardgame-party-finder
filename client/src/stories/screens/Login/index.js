@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Image, Platform } from "react-native";
-import { Container, Content, Header, Body, Title, Button, Text, View, Icon, Footer } from "native-base";
-//import styles from "./styles";
+import * as React from 'react';
+import { Platform } from 'react-native';
+import { Container, Content, Header, Body, Title, Button, Text, View, Icon } from 'native-base';
+//import styles from './styles';
 export interface Props {
 	loginForm: any,
 	onLogin: Function,
@@ -12,12 +12,12 @@ class Login extends React.Component<Props, State> {
 		return (
 			<Container>
 				<Header style={{ height: 200 }}>
-					<Body style={{ alignItems: "center" }}>
-						<Icon name="flash" style={{ fontSize: 104 }} />
-						<Title>ReactNativeSeed.com</Title>
+					<Body style={{ alignItems: 'center' }}>
+						<Icon name="md-contacts" style={{ fontSize: 104 }} />
+						<Title>Board Game Party Finder</Title>
 						<View padder>
-							<Text style={{ color: Platform.OS === "ios" ? "#000" : "#FFF" }}>
-								Build Something Amazing
+							<Text style={{ color: Platform.OS === 'ios' ? '#000' : '#FFF' }}>
+								Play with strangers...
 							</Text>
 						</View>
 					</Body>
@@ -30,17 +30,6 @@ class Login extends React.Component<Props, State> {
 						</Button>
 					</View>
 				</Content>
-				<Footer style={{ backgroundColor: "#F8F8F8" }}>
-					<View style={{ alignItems: "center", opacity: 0.5, flexDirection: "row" }}>
-						<View padder>
-							<Text style={{ color: "#000" }}>Made with love at </Text>
-						</View>
-						<Image
-							source={{ uri: "https://geekyants.com/images/logo-dark.png" }}
-							style={{ width: 422 / 4, height: 86 / 4 }}
-						/>
-					</View>
-				</Footer>
 			</Container>
 		);
 	}

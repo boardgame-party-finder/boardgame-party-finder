@@ -1,19 +1,19 @@
-import * as React from "react";
-import { Text, Container, List, ListItem, Content } from "native-base";
-import { NavigationActions } from "react-navigation";
+import * as React from 'react';
+import { Text, Container, List, ListItem, Content } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 
 const routes = [
 	{
-		route: "Home",
-		caption: "Home",
+		route: 'Home',
+		caption: 'Home',
 	},
 	{
-		route: "BlankPage",
-		caption: "Blank Page",
+		route: 'BlankPage',
+		caption: 'Blank Page',
 	},
 	{
-		route: "Login",
-		caption: "Logout",
+		route: 'Login',
+		caption: 'Logout',
 	},
 ];
 
@@ -23,7 +23,7 @@ export interface Props {
 export interface State {}
 const resetAction = NavigationActions.reset({
 	index: 0,
-	actions: [NavigationActions.navigate({ routeName: "Login" })],
+	actions: [NavigationActions.navigate({ routeName: 'Login' })],
 });
 export default class Sidebar extends React.Component<Props, State> {
 	render() {
@@ -38,7 +38,7 @@ export default class Sidebar extends React.Component<Props, State> {
 								<ListItem
 									button
 									onPress={() => {
-										data.route === "Login"
+										data.route === 'Login'
 											? this.props.navigation.dispatch(resetAction)
 											: this.props.navigation.navigate(data.route);
 									}}

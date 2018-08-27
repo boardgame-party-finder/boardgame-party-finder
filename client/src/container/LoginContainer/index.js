@@ -1,10 +1,10 @@
 // @flow
-import * as React from "react";
-import { Item, Input, Icon, Toast, Form } from "native-base";
-import { Field, reduxForm } from "redux-form";
-import Login from "../../stories/screens/Login";
+import * as React from 'react';
+import { Item, Input, Icon, Toast, Form } from 'native-base';
+import { Field, reduxForm } from 'redux-form';
+import Login from '../../stories/screens/Login';
 
-const required = value => (value ? undefined : "Required");
+const required = value => (value ? undefined : 'Required');
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const maxLength15 = maxLength(15);
@@ -13,11 +13,11 @@ const minLength = min => value =>
 const minLength8 = minLength(8);
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? "Invalid email address"
+    ? 'Invalid email address'
     : undefined;
 const alphaNumeric = value =>
   value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? "Only alphanumeric characters"
+    ? 'Only alphanumeric characters'
     : undefined;
 
 export interface Props {
@@ -30,11 +30,11 @@ class LoginForm extends React.Component<Props, State> {
   renderInput({ input, label, type, meta: { touched, error, warning } }) {
     return (
       <Item error={error && touched}>
-        <Icon active name={input.name === "email" ? "person" : "unlock"} />
+        <Icon active name={input.name === 'email' ? 'person' : 'unlock'} />
         <Input
           ref={c => (this.textInput = c)}
-          placeholder={input.name === "email" ? "Email" : "Password"}
-          secureTextEntry={input.name === "password" ? true : false}
+          placeholder={input.name === 'email' ? 'Email' : 'Password'}
+          secureTextEntry={input.name === 'password' ? true : false}
           {...input}
         />
       </Item>
@@ -42,16 +42,16 @@ class LoginForm extends React.Component<Props, State> {
   }
 
   login() {
-    if (this.props.valid) {
-      this.props.navigation.navigate("Drawer");
-    } else {
-      Toast.show({
-        text: "Enter Valid Username & password!",
-        duration: 2000,
-        position: "top",
-        textStyle: { textAlign: "center" }
-      });
-    }
+    // if (this.props.valid) {
+    this.props.navigation.navigate('MainScreenNavigator');
+    // } else {
+    //   Toast.show({
+    //     text: 'Enter Valid Username & password!',
+    //     duration: 2000,
+    //     position: 'top',
+    //     textStyle: { textAlign: 'center' }
+    //   });
+    // }
   }
 
   render() {
@@ -79,6 +79,6 @@ class LoginForm extends React.Component<Props, State> {
   }
 }
 const LoginContainer = reduxForm({
-  form: "login"
+  form: 'login'
 })(LoginForm);
 export default LoginContainer;
