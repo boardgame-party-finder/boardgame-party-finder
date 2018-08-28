@@ -16,5 +16,8 @@ const styles: any = StyleSheet.create({
 	mt: {
 		marginTop: 18,
 	},
+	button: {
+		paddingTop: 40
+	}
 });
 export default styles;

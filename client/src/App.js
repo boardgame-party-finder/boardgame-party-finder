@@ -5,6 +5,7 @@ import { Root, Footer, FooterTab, Button, Icon, Text } from 'native-base';
 import Login from './container/LoginContainer';
 import Home from './container/HomeContainer';
 import BlankPage from './container/BlankPageContainer';
+import CreateRoom from './container/CreateRoomContainer';
 import MainScreenNavigator from './stories/screens/Tab';
 
 const App = StackNavigator(
@@ -12,6 +13,7 @@ const App = StackNavigator(
 		Login: { screen: Login },
 		BlankPage: { screen: BlankPage },
 		MainScreenNavigator: { screen: MainScreenNavigator },
+		CreateRoom: { screen: CreateRoom }
 	},
 	{
 		initialRouteName: 'Login',

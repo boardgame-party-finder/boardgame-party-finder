@@ -30,7 +30,7 @@ let MainScreenNavigator = TabNavigator(
                         </Button>
                         <Button
                             vertical
-                            active={props.navigationState.index === 2}
+                            active={props.navigationState.index === 1}
                             onPress={() => props.navigation.navigate('Setting')}
                         >
                             <Icon name="settings" />
