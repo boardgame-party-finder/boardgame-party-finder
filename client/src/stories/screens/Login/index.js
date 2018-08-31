@@ -11,9 +11,9 @@ class Login extends React.Component<Props, State> {
 	render() {
 		return (
 			<Container>
-				<Header style={{ height: 200 }}>
+				<Header style={{ height: '75%' }}>
 					<Body style={{ alignItems: 'center' }}>
-						<Icon name="md-contacts" style={{ fontSize: 104 }} />
+						<Icon name="md-contacts" style={{ fontSize: 150 }} />
 						<Title>Board Game Party Finder</Title>
 						<View padder>
 							<Text style={{ color: Platform.OS === 'ios' ? '#000' : '#FFF' }}>
@@ -23,10 +23,9 @@ class Login extends React.Component<Props, State> {
 					</Body>
 				</Header>
 				<Content>
-					{this.props.loginForm}
 					<View padder>
 						<Button block onPress={() => this.props.onLogin()}>
-							<Text>Login</Text>
+							<Text>Facebook Login</Text>
 						</Button>
 					</View>
 				</Content>

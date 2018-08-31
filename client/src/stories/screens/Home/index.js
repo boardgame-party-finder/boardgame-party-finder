@@ -9,7 +9,8 @@ import {
     Body,
     Right,
     Thumbnail,
-    View
+    View,
+    Icon,
 } from 'native-base';
 
 import styles from './styles';
@@ -29,16 +30,16 @@ class Home extends React.Component<Props, State> {
                     <Right />
                 </Header>
                 <Content>
-                    <View style={{ alignItems: 'center', paddingTop: 80 }}>
-                        <Thumbnail square large source={{ uri: 'https://png.icons8.com/metro/1600/dice.png' }} />
+                    <View style={{ alignItems: 'center', paddingTop: 40 }}>
+                        <Icon name="md-contacts" style={{ fontSize: 150 }} />
                         <Text style={styles.text}>Board Game Party Finder</Text>
-                        <View style={styles.button}>
-                            <Button onPress={() => this.props.navigation.navigate('CreateRoom')}>
+                        <View style={styles.button} padder>
+                            <Button block onPress={() => this.props.navigation.navigate('CreateRoom')}>
                                 <Text>Create Room</Text>
                             </Button>
                         </View>
-                        <View style={styles.button}>
-                            <Button onPress={() => this.props.navigation.navigate('BlankPage')}>
+                        <View style={styles.button} padder>
+                            <Button block onPress={() => this.props.navigation.navigate('BlankPage')}>
                                 <Text>Join Room</Text>
                             </Button>
                         </View>

@@ -17,7 +17,8 @@ const styles: any = StyleSheet.create({
 		marginTop: 18,
 	},
 	button: {
-		paddingTop: 40
+		paddingTop: 30,
+		width: '100%'
 	}
 });
 export default styles;
