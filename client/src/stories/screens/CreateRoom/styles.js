@@ -6,7 +6,7 @@ const styles: any = StyleSheet.create({
         marginTop: 20
     },
     slider: {
-        width: '60%',
+        width: '50%',
     }
 });
 export default styles;

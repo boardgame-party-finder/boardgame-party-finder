@@ -35,8 +35,9 @@ class CreateRoomForm extends React.Component<Props, State> {
 
     renderSlider(field) {
         return (
-            <Item style={{ height: 50 }}>
-                <Text>Number of Players</Text>
+            <Item style={{ height: 48 }}>
+                <Icon active name={'ios-man'}/>
+                <Text style={{ marginLeft: 12 }}>Number of Players</Text>
                 <Slider
                     style={styles.slider}
                     step={1}

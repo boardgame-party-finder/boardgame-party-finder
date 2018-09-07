@@ -16,7 +16,7 @@ const App = StackNavigator(
 		CreateRoom: { screen: CreateRoom }
 	},
 	{
-		initialRouteName: 'Login',
+		initialRouteName: 'CreateRoom',
 		headerMode: 'none',
 	}
 );
