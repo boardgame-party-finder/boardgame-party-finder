@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Header, Title, Content, Text, Button, Icon, Left, Right, Body, Form, Item, Input } from 'native-base';
+import { Container, Header, Title, Content, Text, Button, Icon, Left, Right, Body, Form, Item, Input, Picker } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
 import { Slider } from 'react-native';
 import styles from './styles';
@@ -33,26 +33,57 @@ class CreateRoomForm extends React.Component<Props, State> {
         );
     }
 
-    renderSlider(field) {
+    renderSlider({ input: { onChange, value, ...inputProps }, initialValue }) {
         return (
             <Item style={{ height: 48 }}>
-                <Icon active name={'ios-man'}/>
-                <Text style={{ marginLeft: 12 }}>Number of Players</Text>
+                <Icon style={{ marginLeft: 5 }} active name={'ios-man'}/>
+                <Text style={{ marginLeft: 10 }}>Number of Players</Text>
                 <Slider
                     style={styles.slider}
                     step={1}
                     minimumValue={2}
                     maximumValue={10}
-                    value={field.initialValue}
-                    onValueChange={(value) => field.input.onChange(value)}
-            />
-                <Text>{String(field.input.value || field.initialValue)}</Text>
+                    value={initialValue}
+                    onValueChange={value => onChange(value)}
+                />
+                <Text>{String(value || initialValue)}</Text>
             </Item>
         );
     }
 
+    renderGameType({ input: { onChange, value, ...inputProps }, meta: { touched, error }, children, ...pickerProps }) {
+        return (
+            <Item error={error && touched}>
+                <Icon active name={'md-options'} />
+                <Picker
+                    mode='dropdown'
+                    style={{ width: '94%' }}
+                    selectedValue={value}
+                    onValueChange={value => onChange(value)}
+                    children={children}
+                    {...inputProps}
+                    {...pickerProps}
+                >
+                    
+                </Picker>
+            </Item>
+        );
+    }
+
+    componentDidMount() {
+        this.handleInitialize();
+    }
+
+    handleInitialize() {
+        const initData = {
+            numberOfPlayers: 2,
+            gameType: 'any'
+        };
+
+        this.props.initialize(initData);
+    }
+
     render() {
-        const param = this.props.navigation.state.params;
         const { handleSubmit, valid } = this.props;
         return (
             <Container>
@@ -79,6 +110,17 @@ class CreateRoomForm extends React.Component<Props, State> {
                             component={this.renderSlider}
                             initialValue={2}
                         />
+                        <Field
+                            name='gameType'
+                            component={this.renderGameType}
+                        >
+                            <Picker label='Any' value='any' />
+                            <Picker label='Family' value='family' />
+                            <Picker label='Negotiation' value='negotiation' />
+                            <Picker label='Euro' value='euro' />
+                            <Picker label='Co-op' value='coop' />
+                            <Picker label='Party' value='party' />
+                        </Field>
                         <Field
                             name='location'
                             component={this.renderInput}

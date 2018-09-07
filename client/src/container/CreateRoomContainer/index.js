@@ -7,7 +7,7 @@ export interface Props {
 export interface State { }
 export default class CreateRoomContainer extends React.Component<Props, State> {
     showResults(data: any) {
-        // console.log(data)
+        console.log(data)
     }
 
     render() {
