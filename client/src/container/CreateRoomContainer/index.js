@@ -7,13 +7,13 @@ export interface Props {
 export interface State { }
 export default class CreateRoomContainer extends React.Component<Props, State> {
     showResults(data: any) {
-        console.log(data)
+        this.props.navigation.navigate('WaitingRoom', data);
     }
 
     render() {
         return <CreateRoom
             navigation={this.props.navigation}
-            onSubmit={this.showResults}
+            onSubmit={this.showResults.bind(this)}
         />;
     }
 }

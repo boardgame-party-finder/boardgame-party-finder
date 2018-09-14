@@ -6,6 +6,7 @@ import Login from './container/LoginContainer';
 import Home from './container/HomeContainer';
 import BlankPage from './container/BlankPageContainer';
 import CreateRoom from './container/CreateRoomContainer';
+import WaitingRoom from './container/WaitingRoomContainer';
 import MainScreenNavigator from './stories/screens/Tab';
 
 const App = StackNavigator(
@@ -13,10 +14,12 @@ const App = StackNavigator(
 		Login: { screen: Login },
 		BlankPage: { screen: BlankPage },
 		MainScreenNavigator: { screen: MainScreenNavigator },
-		CreateRoom: { screen: CreateRoom }
+		CreateRoom: { screen: CreateRoom },
+		WaitingRoom: { screen: WaitingRoom }
 	},
 	{
-		initialRouteName: 'CreateRoom',
+		initialRouteName: 'WaitingRoom',
+		// initialRouteName: 'Login',
 		headerMode: 'none',
 	}
 );
