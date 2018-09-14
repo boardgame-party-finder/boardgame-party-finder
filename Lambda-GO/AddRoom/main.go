@@ -15,10 +15,6 @@ func main() {
 	lambda.Start(handleRequest)
 }
 
-func dummy() {
-	fmt.Println("Hello world")
-}
-
 func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	requestBody := request.Body
