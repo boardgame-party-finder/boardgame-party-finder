@@ -18,8 +18,7 @@ const App = StackNavigator(
 		WaitingRoom: { screen: WaitingRoom }
 	},
 	{
-		initialRouteName: 'WaitingRoom',
-		// initialRouteName: 'Login',
+		initialRouteName: 'Login',
 		headerMode: 'none',
 	}
 );

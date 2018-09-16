@@ -5,8 +5,17 @@ const styles: any = StyleSheet.create({
         width: '100%',
         marginTop: 20
     },
-    slider: {
-        width: '50%',
+    playerIcon: {
+        backgroundColor: '#D9DBD8'
+    },
+    playerIconReady: {
+        backgroundColor: '#3BB51B'
+    },
+    playerIconNotReady: {
+        backgroundColor: '#E11006'
+    },
+    readyStatus: {
+        color: '#3BB51B'
     }
 });
 export default styles;
