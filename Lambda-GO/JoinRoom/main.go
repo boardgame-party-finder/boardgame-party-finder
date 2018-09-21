@@ -18,11 +18,16 @@ func handleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProx
 
 	roomName := request.QueryStringParameters["room"]
 	userInfo := request.Body
-	result, err := joinRoom(roomName, userInfo)
+
+	data := JoinInfo{}
+
+	json.Unmarshal([]byte(userInfo), &data)
+
+	result, err := joinRoom(roomName, data)
 	fmt.Println(result)
 	fmt.Println("-----------------------------------------------")
 	fmt.Println("Error in function = ", err)
-	jsonResult, err := json.Marshal(result)
+
 	apiRespond := events.APIGatewayProxyResponse{Body: result, StatusCode: 200}
 	return apiRespond, err
 }
