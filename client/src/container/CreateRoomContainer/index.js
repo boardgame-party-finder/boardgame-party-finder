@@ -17,6 +17,7 @@ class CreateRoomContainer extends React.Component<Props, State> {
         Keyboard.dismiss();
         this.props.createRoom(data).then(result => {
             if (result.payload.status === 200) {
+                data._from = 'CreateRoom';
                 this.props.navigation.navigate('WaitingRoom', data);
             } else {
                 Toast.show({

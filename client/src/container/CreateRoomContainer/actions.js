@@ -8,7 +8,7 @@ export function createRoom(data: any) {
         PK: (Math.floor(Math.random() * 90000) + 10000).toString(),
         GameType: data.gameType,
         Name: data.roomName,
-        Max: data.numberOfPlayers,
+        Max: data.max,
         Min: 2
     }
     const request = axios.post(`${ROOT_URL}/dev/room`, reqPayload);

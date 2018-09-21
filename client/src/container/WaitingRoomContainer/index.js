@@ -9,12 +9,12 @@ export interface Props {
 }
 export interface State { }
 class WaitingRoomContainer extends React.Component<Props, State> {
-    onBack() {
-        // from Create Room
-        this.props.navigation.navigate('Home');
-
-        // from Join Room
-        // this.props.navigation.goBack()
+    onBack(data) {
+        if (data._from === 'CreateRoom') {
+            this.props.navigation.navigate('Home'); // from Create Room
+        } else {
+            this.props.navigation.goBack(); // from Join Room
+        }
     }
     onReady() {
         this.props.toggleReady();

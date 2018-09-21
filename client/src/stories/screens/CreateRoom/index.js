@@ -76,7 +76,7 @@ class CreateRoomForm extends React.Component<Props, State> {
 
     handleInitialize() {
         const initData = {
-            numberOfPlayers: 2,
+            max: 2,
             gameType: 'any'
         };
 
@@ -106,7 +106,7 @@ class CreateRoomForm extends React.Component<Props, State> {
                             validate={required}
                         />
                         <Field
-                            name='numberOfPlayers'
+                            name='max'
                             component={this.renderSlider}
                             initialValue={2}
                         />

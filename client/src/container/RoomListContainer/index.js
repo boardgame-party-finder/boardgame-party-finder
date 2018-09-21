@@ -6,9 +6,9 @@ export interface Props {
 }
 export interface State { }
 export default class RoomListContainer extends React.Component<Props, State> {
-    onJoinRoom() {
-        console.log('User press join');
-        this.props.navigation.navigate('WaitingRoom');
+    onJoinRoom(data) {
+        data._from = 'RoomList';
+        this.props.navigation.navigate('WaitingRoom', data);
     }
     render() {
         return <RoomList
