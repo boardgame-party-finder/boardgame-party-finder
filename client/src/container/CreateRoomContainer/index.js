@@ -3,6 +3,9 @@ import * as React from 'react';
 import CreateRoom from '../../stories/screens/CreateRoom';
 import { connect } from 'react-redux';
 import { createRoom } from './actions';
+import { Keyboard } from 'react-native'
+import { Toast } from 'native-base';
+
 export interface Props {
     navigation: any,
     roomData: Object,
@@ -11,12 +14,16 @@ export interface Props {
 export interface State { }
 class CreateRoomContainer extends React.Component<Props, State> {
     submit(data: any) {
-        console.log(data)
+        Keyboard.dismiss();
         this.props.createRoom(data).then(result => {
             if (result.payload.status === 200) {
                 this.props.navigation.navigate('WaitingRoom', data);
             } else {
-                console.log('error');
+                Toast.show({
+                    text: 'Cannot create the room',
+                    buttonText: 'I got it',
+                    type: 'danger'
+                });
             }
         });
     }
