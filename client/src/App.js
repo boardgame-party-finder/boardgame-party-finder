@@ -7,6 +7,7 @@ import Home from './container/HomeContainer';
 import BlankPage from './container/BlankPageContainer';
 import CreateRoom from './container/CreateRoomContainer';
 import WaitingRoom from './container/WaitingRoomContainer';
+import RoomList from './container/RoomListContainer';
 import MainScreenNavigator from './stories/screens/Tab';
 
 const App = StackNavigator(
@@ -15,7 +16,8 @@ const App = StackNavigator(
 		BlankPage: { screen: BlankPage },
 		MainScreenNavigator: { screen: MainScreenNavigator },
 		CreateRoom: { screen: CreateRoom },
-		WaitingRoom: { screen: WaitingRoom }
+		WaitingRoom: { screen: WaitingRoom },
+		RoomList: { screen: RoomList }
 	},
 	{
 		initialRouteName: 'Login',

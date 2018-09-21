@@ -25,7 +25,7 @@ export interface Props {
     list: any;
 }
 export interface State { }
-class WaitingRoom extends React.Component<Props, State> {
+class RoomList extends React.Component<Props, State> {
     renderPlayerLists() {
 
     }
@@ -38,21 +38,48 @@ class WaitingRoom extends React.Component<Props, State> {
         const numberOfPlayers = params.numberOfPlayers || 4;
         const roomName = params.roomName || 'My room';
 
+        const rooms = [{
+            tbn: 'room',
+            pk: '',
+            gameType: '',
+            name: 'room Name',
+            max: '',
+            min: ''
+        }];
+
         return (
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => this.props.onBack()}>
+                        <Button transparent onPress={() => this.props.navigation.goBack()}>
                             <Icon name="ios-arrow-back" />
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Waiting Room</Title>
+                        <Title>Room List</Title>
                     </Body>
                     <Right />
                 </Header>
                 <Content padder>
                     <Card>
+                    <List dataArray={rooms}
+                        renderRow={(room) =>
+                        <ListItem avatar>
+                            <Left />
+                            <Body>
+                            <Text>{room.name}</Text>
+                            <Text note>Doing what you like will always keep you happy . .</Text>
+                            </Body>
+                            <Right>
+                            <Text note>3:43 pm</Text>
+                            </Right>
+                        </ListItem>
+                        }>
+                    </List>
+
+
+
+
                         <List>
                             <ListItem icon>
                                 <Left><Icon active name="home" /></Left>
@@ -91,65 +118,12 @@ class WaitingRoom extends React.Component<Props, State> {
                                 <Right>
                                 </Right>
                             </ListItem>
-                            <ListItem icon>
-                                <Left>
-                                    <Button style={styles.playerIconReady}><Icon active name="person" /></Button>
-                                </Left>
-                                <Body>
-                                    <Text>CheeseclothAngel</Text>
-                                </Body>
-                                <Right>
-                                    <Text>Ready</Text>
-                                    <Icon style={styles.readyStatus} active name="checkmark" />
-                                </Right>
-                            </ListItem>
-                            <ListItem icon>
-                                <Left>
-                                    <Button style={styles.playerIconReady}><Icon active name="person" /></Button>
-                                </Left>
-                                <Body>
-                                    <Text>Icestoppers</Text>
-                                </Body>
-                                <Right>
-                                    <Text>Ready</Text>
-                                    <Icon style={styles.readyStatus} active name="checkmark" />
-                                </Right>
-                            </ListItem>                            
-                            <ListItem icon>
-                                <Left>
-                                    <Button style={styles.playerIcon}><Icon active name="person" /></Button>
-                                </Left>
-                                <Body>
-                                    <Text>Waiting for player...</Text>
-                                </Body>
-                                <Right>
-                                    <Icon active name="timer" />
-                                </Right>
-                            </ListItem>
-                            <ListItem icon>
-                                <Left>
-                                    <Button style={styles.playerIcon}><Icon active name="person" /></Button>
-                                </Left>
-                                <Body>
-                                    <Text>Waiting for player...</Text>
-                                </Body>
-                                <Right>
-                                    <Icon active name="timer" />
-                                </Right>
-                            </ListItem>
                         </List>
                     </Card>
-
-                    <Button block rounded success style={styles.submitButton} onPress={() => this.props.onReady()}>
-                        <Text>Ready</Text>
-                    </Button>
-                    {/* <Button block rounded danger style={styles.submitButton} onPress={handleSubmit}>
-                        <Text>Not Ready</Text>
-                    </Button> */}
                 </Content>
             </Container>
         );
     }
 }
 
-export default WaitingRoom;
+export default RoomList;
