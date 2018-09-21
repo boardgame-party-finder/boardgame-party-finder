@@ -23,9 +23,18 @@ import { Field } from 'redux-form';
 export interface Props {
     navigation: any;
     list: any;
+    isReady: boolean;
+    onBack: Function;
+    onReady: Function;
 }
 export interface State { }
 class WaitingRoom extends React.Component<Props, State> {
+    componentDidUpdate(prevProps) {
+        console.log(this.props)
+        if (this.props.isReady) {
+        }
+    } 
+
     renderPlayerLists() {
 
     }
@@ -140,12 +149,9 @@ class WaitingRoom extends React.Component<Props, State> {
                         </List>
                     </Card>
 
-                    <Button block rounded success style={styles.submitButton} onPress={() => this.props.onReady()}>
-                        <Text>Ready</Text>
+                    <Button block rounded success={!this.props.isReady} danger={this.props.isReady} style={styles.submitButton} onPress={() => this.props.onReady()}>
+                        <Text>{this.props.isReady ? 'Unready': 'Ready'}</Text>
                     </Button>
-                    {/* <Button block rounded danger style={styles.submitButton} onPress={handleSubmit}>
-                        <Text>Not Ready</Text>
-                    </Button> */}
                 </Content>
             </Container>
         );
