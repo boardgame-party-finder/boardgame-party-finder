@@ -33,18 +33,43 @@ class RoomList extends React.Component<Props, State> {
     render() {
         const { handleSubmit, valid } = this.props;
         const params = this.props.navigation.state.params || {};
-        const gameType = params.gameType || 'Any';
-        const location = params.location || 'Siam Center';
-        const numberOfPlayers = params.numberOfPlayers || 4;
-        const roomName = params.roomName || 'My room';
 
+        // Backend did not support location
         const rooms = [{
-            tbn: 'room',
+            tbn: '',
             pk: '',
-            gameType: '',
-            name: 'room Name',
-            max: '',
-            min: ''
+            gameType: 'Family',
+            name: 'Room Name 1',
+            max: '6',
+            min: '2'
+        }, {
+            tbn: '',
+            pk: '',
+            gameType: 'Negotiation',
+            name: 'Room Name 2',
+            max: '4',
+            min: '2'
+        }, {
+            tbn: '',
+            pk: '',
+            gameType: 'Co-op',
+            name: 'Room Name 3',
+            max: '3',
+            min: '2'
+        }, {
+            tbn: '',
+            pk: '',
+            gameType: 'Co-op',
+            name: 'Room Name 4',
+            max: '2',
+            min: '2'
+        }, {
+            tbn: '',
+            pk: '',
+            gameType: 'Any',
+            name: 'Room Name 5',
+            max: '2',
+            min: '2'
         }];
 
         return (
@@ -64,61 +89,19 @@ class RoomList extends React.Component<Props, State> {
                     <Card>
                     <List dataArray={rooms}
                         renderRow={(room) =>
-                        <ListItem avatar>
-                            <Left />
+                        <ListItem>
                             <Body>
-                                <Text>{room.name}</Text>
-                                <Text note>Doing what you like will always keep you happy . .</Text>
+                                <Text>{room.name} (1/{room.max})</Text>
+                                <Text note>Type: {room.gameType}</Text>
                             </Body>
                             <Right>
-                                <Text note>3:43 pm</Text>
+                            <Button rounded success onPress={() => this.props.onJoinRoom()}>
+                                <Text>Join</Text>
+                            </Button>
                             </Right>
                         </ListItem>
                         }>
                     </List>
-
-
-
-
-                        <List>
-                            <ListItem icon>
-                                <Left><Icon active name="home" /></Left>
-                                <Body><Text>{roomName}</Text></Body>
-                            </ListItem>
-                            <ListItem icon>
-                                <Left><Icon active name="md-options" /></Left>
-                                <Body><Text>{gameType}</Text></Body>
-                            </ListItem>
-                            <ListItem icon>
-                                <Left><Icon active name="md-map" /></Left>
-                                <Body><Text>{location}</Text></Body>
-                            </ListItem>
-                            <Separator bordered>
-                                <Text>Players</Text>
-                            </Separator>
-                            <ListItem icon>
-                                <Left>
-                                    <Button style={styles.playerIconReady}><Icon active name="person" /></Button>
-                                </Left>
-                                <Body>
-                                    <Text>Frowningstick</Text>
-                                </Body>
-                                <Right>
-                                    <Text>Ready</Text>
-                                    <Icon style={styles.readyStatus} active name="checkmark" />
-                                </Right>
-                            </ListItem>
-                            <ListItem icon>
-                                <Left>
-                                    <Button style={styles.playerIconNotReady}><Icon active name="person" /></Button>
-                                </Left>
-                                <Body>
-                                    <Text>Slumpfickle</Text>
-                                </Body>
-                                <Right>
-                                </Right>
-                            </ListItem>
-                        </List>
                     </Card>
                 </Content>
             </Container>
