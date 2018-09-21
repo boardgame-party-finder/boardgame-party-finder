@@ -114,12 +114,12 @@ class CreateRoomForm extends React.Component<Props, State> {
                             name='gameType'
                             component={this.renderGameType}
                         >
-                            <Picker label='Any' value='any' />
-                            <Picker label='Family' value='family' />
-                            <Picker label='Negotiation' value='negotiation' />
-                            <Picker label='Euro' value='euro' />
-                            <Picker label='Co-op' value='coop' />
-                            <Picker label='Party' value='party' />
+                            <Picker label='Any' value='Any' />
+                            <Picker label='Family' value='Family' />
+                            <Picker label='Negotiation' value='Negotiation' />
+                            <Picker label='Euro' value='Euro' />
+                            <Picker label='Co-op' value='Co-op' />
+                            <Picker label='Party' value='Party' />
                         </Field>
                         <Field
                             name='location'

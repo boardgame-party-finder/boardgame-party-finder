@@ -39,7 +39,7 @@ class Home extends React.Component<Props, State> {
                             </Button>
                         </View>
                         <View style={styles.button} padder>
-                            <Button block onPress={() => this.props.navigation.navigate('BlankPage')}>
+                            <Button block onPress={() => this.props.navigation.navigate('RoomList')}>
                                 <Text>Join Room</Text>
                             </Button>
                         </View>
