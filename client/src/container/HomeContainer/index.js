@@ -11,10 +11,6 @@ export interface Props {
 }
 export interface State {}
 class HomeContainer extends React.Component<Props, State> {
-	componentDidMount() {
-		this.props.fetchList(datas);
-		console.log(this.props)
-	}
 	render() {
 		return <Home navigation={this.props.navigation} list={this.props.data} />;
 	}

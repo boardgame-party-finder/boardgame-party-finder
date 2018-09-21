@@ -67,11 +67,11 @@ class RoomList extends React.Component<Props, State> {
                         <ListItem avatar>
                             <Left />
                             <Body>
-                            <Text>{room.name}</Text>
-                            <Text note>Doing what you like will always keep you happy . .</Text>
+                                <Text>{room.name}</Text>
+                                <Text note>Doing what you like will always keep you happy . .</Text>
                             </Body>
                             <Right>
-                            <Text note>3:43 pm</Text>
+                                <Text note>3:43 pm</Text>
                             </Right>
                         </ListItem>
                         }>
