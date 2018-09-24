@@ -27,6 +27,7 @@ type RoomKey struct {
 }
 
 type UserInfo struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Ready bool   `json:"ready"`
 }
