@@ -1,13 +1,13 @@
 const initialState = {
-    roomData: {}
+    roomList: []
 };
 
 export default function (state: any = initialState, action: Function) {
-    if (action.type === 'CREATE_ROOM') { 
+    if (action.type === 'LIST_ROOM') {
         return {
             ...state,
-            roomData: action.payload.data
-        };
+            roomList: action.payload.data
+        }
     }
     return state;
 }

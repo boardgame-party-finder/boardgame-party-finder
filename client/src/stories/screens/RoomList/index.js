@@ -22,7 +22,7 @@ import styles from './styles';
 import { Field } from 'redux-form';
 export interface Props {
     navigation: any;
-    list: any;
+    roomList: Array;
 }
 export interface State { }
 class RoomList extends React.Component<Props, State> {
