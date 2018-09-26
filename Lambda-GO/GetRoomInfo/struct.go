@@ -5,10 +5,6 @@ type User struct {
 	PK        string `json:"pk"`
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
-	// GameType  string `json:"gametype"`
-	// Name      string `json:"name"`
-	// Max       int64  `json:"max"`
-	// Min       int64  `json:"min"`
 }
 
 type Lobby struct {
@@ -16,14 +12,23 @@ type Lobby struct {
 	PK       string        `json:"pk"`
 	GameType string        `json:"gametype"`
 	Name     string        `json:"name"`
-	Max      int64         `json:"max"`
+	Max      int64         `json:"maxU"`
 	Min      int64         `json:"min"`
 	InUsers  []GetUserInfo `json:"inusers"`
 }
 
-type RoomUser struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type JoinInfo struct {
+	PK   string `json:"PK"`
+	Name string `json:"Name"`
+}
+
+type RoomKey struct {
+	TbN string `json:"TbN"`
+	PK  string `json:"PK"`
+}
+
+type UserInfo struct {
+	ID string `json:"id"`
 }
 
 type GetUserInfo struct {

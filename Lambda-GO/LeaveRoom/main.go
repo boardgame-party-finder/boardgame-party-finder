@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -17,10 +16,9 @@ func main() {
 func handleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	roomName := request.QueryStringParameters["room"]
-	userInfo := request.Body
-	data := JoinInfo{}
-	json.Unmarshal([]byte(userInfo), &data)
-	result, err := leaveRoom(roomName, data)
+	userInfo := request.QueryStringParameters["user"]
+
+	result, err := leaveRoom(roomName, userInfo)
 	fmt.Println(result)
 	fmt.Println("-----------------------------------------------")
 	fmt.Println("Error in function = ", err)

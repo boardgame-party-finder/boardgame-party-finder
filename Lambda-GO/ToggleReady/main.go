@@ -15,10 +15,11 @@ func main() {
 
 func handleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	roomName := request.QueryStringParameters["room"]
+	roomPK := request.QueryStringParameters["room"]
 	userPK := request.QueryStringParameters["user"]
+	readyStatus := request.QueryStringParameters["ready"]
 
-	result, err := joinRoom(roomName, userPK)
+	result, err := toggleReady(roomPK, userPK, readyStatus)
 	fmt.Println(result)
 	fmt.Println("-----------------------------------------------")
 	fmt.Println("Error in function = ", err)

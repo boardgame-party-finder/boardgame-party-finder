@@ -1,0 +1,120 @@
+1: CreateRoom
+    - Create room to DynamoDB
+
+    Resource:  /room
+    Method:    POST
+    parameter: none
+
+    Request Body {
+        
+    “TbN”: “room”,             // TbN must be string "room"
+    “PK”: “141626264",         // Room Primary Key
+    “GameType”: “bluff”,       // Type of game
+    “Name”: “ok”,              // Room name
+    “Max”: “10",               // Maximum number of player
+    “Min”: “2"                 // Minimum number to start
+
+    }
+
+    return value : PK  // Room primary Key
+
+2: Get room infomation
+    - Get infomation of specific room
+
+    Resource    /room
+    Method      /Get
+    parameter:  roomPK="PrimaryKey of room"  (Eg: roomPk="12345")
+
+    return value : [                        
+                        {
+                            "tbn": "room",
+                            "pk": "12345",
+                            "gametype": "bluff",
+                            "name": "fun",
+                            "maxU": 0,
+                            "min": 2,
+                            "inusers": [            // inusers = null if don't have any user
+                                {
+                                "id": "testuser1",
+                                "name": "test1",
+                                "ready": true
+                                }
+                            ]
+                        }
+            
+
+
+3: Get all room
+    - Get all room in DynamoDB
+
+    Resource:  /rooms
+    Method:    GET
+    parameter: none
+
+    return value {
+        [
+            {
+                "tbn": "room",              // Table name
+                "pk": "12345",              // Primary Key of room
+                "gametype": "bluff",        // Game type of room
+                "name": "fun",              // Name of room
+                "max": 6,                   // Maximum number of player
+                "min": 2,                   // minimum number to start
+                "inusers" : [               // Current users in room
+                    {
+                        "id": "testuser1",  // User Primary Key
+                        "name": "test1",    // User name
+                        "ready": true       // Status of user
+                    }
+                ]
+            }
+        ]
+    }
+
+        ]
+
+
+4: Create new user
+    - Create New User To DynamoDB
+
+    Resource:  /user
+    Method:    POST
+    parameter: none
+
+    Request Body  
+        {
+        “TbN”:“user”,           // TbN must be string "user"
+        “PK”:“abc@gmail.com”    // User primary Key
+        }
+
+    Return value : {
+        Body: result            // success or fail
+        StatusCode : code       // 200 if success 504 if failed
+    }
+
+5: Join Room    
+    - Add user into selected room
+
+    Resource:   /join
+    Method  :   POST
+    parameter:  room="Room user want to Join" & user="PrimaryKey of User"  (Eg: room="12345"&user="somsri")
+
+    Return value: "success"     // If join success
+
+6: Leave Room
+    - Remove User from room in DynamoDB
+
+    Resource:   /leave
+    Method  :   PATCH
+    parameter:  room="Room User want to leave" & user="PrimaryKey of user" (Eg: room="12345"&user="somsri")
+
+    Return value: true or false
+
+7. Toggle ready
+    - Change status of user in room
+
+    Resource:   /ready
+    Method  :   PATCH
+    parameter:  room="Room PrimaryKey" & user="PrimaryKey of User"  (Eg: room="12345"&user="somsri")
+
+    Return value:   true or false

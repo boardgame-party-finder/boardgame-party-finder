@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 )
 
-func joinRoom(roomNumber string, user JoinInfo) (string, error) {
+func joinRoom(roomNumber string, user string) (string, error) {
 
 	var db = dynamodb.New(session.New(), aws.NewConfig().WithRegion("us-east-2"))
 	var table = "BoardGameDB"
@@ -21,14 +21,12 @@ func joinRoom(roomNumber string, user JoinInfo) (string, error) {
 	fmt.Println("=================================================")
 	fmt.Println("Key = ", key)
 	userInfo, err := dynamodbattribute.MarshalMap(UserInfo{
-		ID:    user.PK,
-		Name:  user.Name,
+		ID:    user,
 		Ready: false,
 	})
 	userInfos, err := dynamodbattribute.MarshalList([]UserInfo{
 		UserInfo{
-			ID:    user.PK,
-			Name:  user.Name,
+			ID:    user,
 			Ready: false,
 		},
 	})

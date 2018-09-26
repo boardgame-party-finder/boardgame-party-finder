@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -10,15 +9,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 )
 
-func leaveRoom(roomNumber string, user string) (string, error) {
+func GetRoomInfo(roomNumber string) ([]Lobby, error) {
 
 	var db = dynamodb.New(session.New(), aws.NewConfig().WithRegion("us-east-2"))
 	var table = "BoardGameDB"
-	result := "true"
-
-	key, err := dynamodbattribute.MarshalMap(RoomKey{
-		"room",
-		roomNumber})
 	// Find index of element in list inUsers
 	var queryInput = &dynamodb.QueryInput{
 		TableName: aws.String(table),
@@ -44,44 +38,12 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 
 	var resp1, err1 = db.Query(queryInput)
 
-	fmt.Println("resp1 = ", resp1)
-	index := 0
-
 	if err1 != nil {
 		fmt.Println(err1)
 	}
 	personObj := []Lobby{}
 	err1 = dynamodbattribute.UnmarshalListOfMaps(resp1.Items, &personObj)
 
-	for i := range personObj[0].InUsers {
-		if personObj[0].InUsers[i].ID == user {
-			fmt.Println("index:", i)
-			index = i
-		}
-	}
-
-	// Remove element in list by index
-
-	remove := "REMOVE #inUsers[" + strconv.Itoa(index) + "]"
-	fmt.Println("remove = ", remove)
-
-	input := &dynamodb.UpdateItemInput{
-		Key:              key,
-		TableName:        aws.String(table),
-		UpdateExpression: aws.String(remove),
-		ExpressionAttributeNames: map[string]*string{
-			"#inUsers": aws.String("inUsers"),
-		},
-
-		ReturnValues: aws.String("NONE")}
-
-	_, err = db.UpdateItem(input)
-
-	if err != nil {
-		fmt.Println(err)
-		result = "false"
-	}
-
-	return result, err1
+	return personObj, err1
 
 }

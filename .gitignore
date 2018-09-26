@@ -1,4 +1,7 @@
 
 *.snap
+*.zip
+.DS_Store
 client/src/App.js
 client/src/App.js
+

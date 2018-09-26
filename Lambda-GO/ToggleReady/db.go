@@ -10,15 +10,20 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 )
 
-func leaveRoom(roomNumber string, user string) (string, error) {
+func toggleReady(roomPK string, userPK string, readyStatus string) (string, error) {
 
 	var db = dynamodb.New(session.New(), aws.NewConfig().WithRegion("us-east-2"))
 	var table = "BoardGameDB"
 	result := "true"
 
+	ready, errConvert := strconv.ParseBool(readyStatus)
+	fmt.Println("Ready = ", ready)
+	if errConvert != nil {
+		fmt.Println(errConvert)
+	}
 	key, err := dynamodbattribute.MarshalMap(RoomKey{
 		"room",
-		roomNumber})
+		roomPK})
 	// Find index of element in list inUsers
 	var queryInput = &dynamodb.QueryInput{
 		TableName: aws.String(table),
@@ -35,7 +40,7 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 				ComparisonOperator: aws.String("EQ"),
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{
-						S: aws.String(roomNumber),
+						S: aws.String(roomPK),
 					},
 				},
 			},
@@ -43,8 +48,6 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 	}
 
 	var resp1, err1 = db.Query(queryInput)
-
-	fmt.Println("resp1 = ", resp1)
 	index := 0
 
 	if err1 != nil {
@@ -54,7 +57,7 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 	err1 = dynamodbattribute.UnmarshalListOfMaps(resp1.Items, &personObj)
 
 	for i := range personObj[0].InUsers {
-		if personObj[0].InUsers[i].ID == user {
+		if personObj[0].InUsers[i].ID == userPK {
 			fmt.Println("index:", i)
 			index = i
 		}
@@ -62,7 +65,7 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 
 	// Remove element in list by index
 
-	remove := "REMOVE #inUsers[" + strconv.Itoa(index) + "]"
+	remove := "SET #inUsers[" + strconv.Itoa(index) + "].ready = :ready"
 	fmt.Println("remove = ", remove)
 
 	input := &dynamodb.UpdateItemInput{
@@ -71,6 +74,11 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 		UpdateExpression: aws.String(remove),
 		ExpressionAttributeNames: map[string]*string{
 			"#inUsers": aws.String("inUsers"),
+		},
+		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+			":ready": {
+				BOOL: aws.Bool(ready),
+			},
 		},
 
 		ReturnValues: aws.String("NONE")}

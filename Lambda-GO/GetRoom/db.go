@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
@@ -27,6 +29,8 @@ func getRoom() ([]Lobby, error) {
 	}
 
 	var result, err = db.Query(queryInput)
+
+	fmt.Println(result)
 
 	room := []Lobby{}
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &room)

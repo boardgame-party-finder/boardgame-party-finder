@@ -36,7 +36,7 @@ func createRoom(roomData Lobby) (string, error) {
 	}
 
 	fmt.Println("Successfully added item in table ")
-	result := "Success"
+	result := roomData.PK
 
 	return result, err
 

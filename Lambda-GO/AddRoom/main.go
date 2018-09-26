@@ -27,8 +27,7 @@ func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 		return apiRespond, err
 	}
 	fmt.Println(result)
-	// fmt.Println("-----------------------------------------------")
-	// fmt.Println("Error in function = ", err)
+
 	apiRespond := events.APIGatewayProxyResponse{Body: result, StatusCode: 200}
 	return apiRespond, nil
 }
