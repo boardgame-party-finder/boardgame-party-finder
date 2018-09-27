@@ -26,47 +26,7 @@ export interface Props {
 }
 export interface State { }
 class RoomList extends React.Component<Props, State> {
-    renderPlayerLists() {
-
-    }
-
     render() {
-        const { handleSubmit, valid } = this.props;
-        const params = this.props.navigation.state.params || {};
-
-        // Backend did not support location
-        const rooms = [{
-            gameType: 'Family',
-            roomName: 'Room Name 1',
-            numberOfPlayers: '2',
-            max: '6',
-            min: '2'
-        }, {
-            gameType: 'Negotiation',
-            roomName: 'Room Name 2',
-            numberOfPlayers: '4',
-            max: '4',
-            min: '2'
-        }, {
-            gameType: 'Co-op',
-            roomName: 'Room Name 3',
-            numberOfPlayers: '2',
-            max: '3',
-            min: '2'
-        }, {
-            gameType: 'Co-op',
-            roomName: 'Room Name 4',
-            numberOfPlayers: '1',
-            max: '2',
-            min: '2'
-        }, {
-            gameType: 'Any',
-            roomName: 'Room Name 5',
-            numberOfPlayers: '5',
-            max: '6',
-            min: '2'
-        }];
-
         return (
             <Container>
                 <Header>
@@ -82,12 +42,12 @@ class RoomList extends React.Component<Props, State> {
                 </Header>
                 <Content padder>
                     <Card>
-                    <List dataArray={rooms}
+                    <List dataArray={this.props.roomList}
                         renderRow={(room) =>
                         <ListItem>
                             <Body>
-                                <Text>{room.roomName} ({room.numberOfPlayers}/{room.max})</Text>
-                                <Text note>Type: {room.gameType}</Text>
+                                <Text>{room.name ? room.name : 'Just for Fun !!'} ({room.inusers ? room.inusers.length : 0}/{room.max})</Text>
+                                <Text note>Type: {room.gametype ? room.gametype : 'Any' }</Text>
                             </Body>
                             <Right>
                             <Button rounded success onPress={() => this.props.onJoinRoom(room)}>

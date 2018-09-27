@@ -75,11 +75,12 @@ class WaitingRoom extends React.Component<Props, State> {
     render() {
         const { handleSubmit, valid } = this.props;
         const params = this.props.navigation.state.params || {};
-        const gameType = this.props.roomData.gametype;
-        const location = this.props.roomData.location || params.location;
-        const roomName = this.props.roomData.name;
-        const max = this.props.roomData.maxU;
-        const users = this.props.roomData.inusers || [];
+        const roomData = this.props.roomData;
+        const gameType = roomData.gametype;
+        const location = roomData.location || params.location;
+        const roomName = roomData.name;
+        const max = roomData.maxU;
+        const users = roomData.inusers || [];
 
         return (
             <Container>
