@@ -15,6 +15,12 @@
     "androidStatusBar": {
       "barStyle": "light-content",
       "backgroundColor": "#334393"
+    },
+    "ios": {
+      "bundleIdentifier": "com.playcloud.boardgame"
+    },
+    "android": {
+      "package": "com.playcloud.boardgame"
     }
   }
 }
