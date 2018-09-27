@@ -22,7 +22,6 @@ class CreateRoomContainer extends React.Component<Props, State> {
             } else {
                 Toast.show({
                     text: 'Cannot create the room',
-                    buttonText: 'I got it',
                     type: 'danger'
                 });
             }
