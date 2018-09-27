@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Platform, Input } from 'react-native';
-import { Container, Content, Header, Body, Title, Button, Text, View, Icon, Item, Form, Picker } from 'native-base';
+import { Platform  } from 'react-native';
+import { Container, Content, Header, Body, Title, Button, Text, View, Icon, Item, Form, Picker, Input } from 'native-base';
 import { Field, reduxForm } from 'redux-form';
 import { Slider } from 'react-native';
 
@@ -23,48 +23,12 @@ class LoginForm extends React.Component<Props, State> {
 	renderInput({ input, label, type, meta: { touched, error, warning } }) {
 		return (
 			<Item error={error && touched}>
-				<Icon active name={input.name === 'roomName' ? 'home' : 'md-map'} />
+				<Icon active name='person' />
 				<Input
 					ref={c => (this.textInput = c)}
-					placeholder={input.name === 'roomName' ? 'Room Name' : 'Location'}
+					placeholder='Enter your name'
 					{...input}
 				/>
-			</Item>
-		);
-	}
-
-	renderSlider({ input: { onChange, value, ...inputProps }, initialValue }) {
-		return (
-			<Item style={{ height: 48 }}>
-				<Icon style={{ marginLeft: 5 }} active name={'ios-man'} />
-				<Text style={{ marginLeft: 10 }}>Number of Players</Text>
-				<Slider
-					step={1}
-					minimumValue={2}
-					maximumValue={10}
-					value={initialValue}
-					onValueChange={value => onChange(value)}
-				/>
-				<Text>{String(value || initialValue)}</Text>
-			</Item>
-		);
-	}
-
-	renderGameType({ input: { onChange, value, ...inputProps }, meta: { touched, error }, children, ...pickerProps }) {
-		return (
-			<Item error={error && touched}>
-				<Icon active name={'md-options'} />
-				<Picker
-					mode='dropdown'
-					style={{ width: '94%' }}
-					selectedValue={value}
-					onValueChange={value => onChange(value)}
-					children={children}
-					{...inputProps}
-					{...pickerProps}
-				>
-
-				</Picker>
 			</Item>
 		);
 	}
@@ -85,36 +49,15 @@ class LoginForm extends React.Component<Props, State> {
 						</View>
 					</Body>
 				</Header>
-				<Content padder>
+				<Content style={{ marginTop: 20 }} padder>
 					<Form>
 						<Field
-							name='roomName'
-							component={this.renderInput}
-							validate={required}
-						/>
-						<Field
-							name='max'
-							component={this.renderSlider}
-							initialValue={2}
-						/>
-						<Field
-							name='gameType'
-							component={this.renderGameType}
-						>
-							<Picker label='Any' value='Any' />
-							<Picker label='Family' value='Family' />
-							<Picker label='Negotiation' value='Negotiation' />
-							<Picker label='Euro' value='Euro' />
-							<Picker label='Co-op' value='Co-op' />
-							<Picker label='Party' value='Party' />
-						</Field>
-						<Field
-							name='location'
-							component={this.renderInput}
-							validate={required}
-						/>
-						<Button onPress={handleSubmit}>
-							<Text>Create Room</Text>
+                            name='userName'
+                            component={this.renderInput}
+                            validate={required}
+                        />
+						<Button style={{ marginTop: 30 }} block onPress={handleSubmit}>
+							<Text>Login</Text>
 						</Button>
 					</Form>
 				</Content>

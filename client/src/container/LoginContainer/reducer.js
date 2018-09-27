@@ -1,13 +1,22 @@
 const initialState = {
-    name: ''
+    isError: false
 };
 
 export default function (state: any = initialState, action: Function) {
-    if (action.type === 'LOGIN') {
-        return {
-            ...state,
-            roomData: action.data
-        };
+    switch (action.type) {
+        case 'LOGIN':
+            return state;
+        case 'LOGIN_SUCCESS':
+            return {
+                ...state,
+                isError: false
+            };
+        case 'LOGIN_FAILED':
+            return {
+                ...state,
+                isError: true
+            };
+        default:
+            return state;
     }
-    return state;
 }
