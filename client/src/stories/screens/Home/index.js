@@ -16,7 +16,7 @@ import {
 import styles from './styles';
 export interface Props {
     navigation: any;
-    list: any;
+    userName: string;
 }
 export interface State { }
 class Home extends React.Component<Props, State> {
@@ -33,6 +33,7 @@ class Home extends React.Component<Props, State> {
                     <View style={{ alignItems: 'center', paddingTop: 40 }}>
                         <Icon name="md-contacts" style={{ fontSize: 150 }} />
                         <Text style={styles.text}>Board Game Party Finder</Text>
+                        <Text style={styles.text}>Welcome {this.props.userName}!</Text>
                         <View style={styles.button} padder>
                             <Button block onPress={() => this.props.navigation.navigate('CreateRoom')}>
                                 <Text>Create Room</Text>

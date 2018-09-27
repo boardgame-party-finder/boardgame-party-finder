@@ -38,7 +38,7 @@ class LoginContainer extends React.Component<Props, State> {
 function bindAction(dispatch) {
     return {
         login: data => dispatch(login(data)).then((response) => {
-            dispatch(loginSuccess(response.payload.data));
+            dispatch(loginSuccess(data));
         })
         .catch((err) => {
             dispatch(loginFailed(err));

@@ -12,7 +12,7 @@ export interface Props {
 export interface State {}
 class HomeContainer extends React.Component<Props, State> {
 	render() {
-		return <Home navigation={this.props.navigation} list={this.props.data} />;
+		return <Home navigation={this.props.navigation} userName={this.props.userName} />;
 	}
 }
 
@@ -25,5 +25,6 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
 	data: state.homeReducer.list,
 	isLoading: state.homeReducer.isLoading,
+	userName: state.loginReducer.userName
 });
 export default connect(mapStateToProps, bindAction)(HomeContainer);

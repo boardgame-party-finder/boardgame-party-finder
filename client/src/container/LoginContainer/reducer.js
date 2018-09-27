@@ -1,5 +1,6 @@
 const initialState = {
-    isError: false
+    isError: false,
+    userName: ''
 };
 
 export default function (state: any = initialState, action: Function) {
@@ -9,7 +10,8 @@ export default function (state: any = initialState, action: Function) {
         case 'LOGIN_SUCCESS':
             return {
                 ...state,
-                isError: false
+                isError: false,
+                userName: action.payload
             };
         case 'LOGIN_FAILED':
             return {
