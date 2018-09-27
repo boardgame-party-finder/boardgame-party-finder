@@ -1,13 +1,27 @@
 const initialState = {
-    roomData: {}
+    isCreateRoomError: false,
+    roomId: null
 };
 
 export default function (state: any = initialState, action: Function) {
-    if (action.type === 'CREATE_ROOM') { 
-        return {
-            ...state,
-            roomData: action.payload.data
-        };
+    switch (action.type) {
+        case 'CREATE_ROOM':
+            console.log('roomId', action.payload.data)
+            return {
+                ...state,
+                roomId: parseInt(action.payload.data, 10)
+            };
+        case 'CREATE_ROOM_SUCCESS':
+            return {
+                ...state,
+                isCreateRoomError: false
+            };
+        case 'CREATE_ROOM_FAILED':
+            return {
+                ...state,
+                isCreateRoomError: true
+            };
+        default:
+            return state;
     }
-    return state;
 }

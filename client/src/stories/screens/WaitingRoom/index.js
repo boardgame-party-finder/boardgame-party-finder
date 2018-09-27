@@ -31,8 +31,9 @@ export interface State { }
 class WaitingRoom extends React.Component<Props, State> {
     renderPlayerLists(users, max) {
         let _users = users.map((user, i) => {
+            if (user.id === 'dummy') return;
             let _right;
-            if (user.isReady) {
+            if (user.ready) {
                 _right = 
                 <Right>
                     <Text>Ready</Text>
@@ -42,10 +43,10 @@ class WaitingRoom extends React.Component<Props, State> {
             return (
             <ListItem icon key={i}>
                 <Left>
-                    <Button style={user.isReady ? styles.playerIconReady : styles.playerIconNotReady } key={i}><Icon active name="person" /></Button>
+                        <Button style={user.ready ? styles.playerIconReady : styles.playerIconNotReady } key={i}><Icon active name="person" /></Button>
                 </Left>
                 <Body>
-                    <Text>{user.name}</Text>
+                    <Text>{user.id}</Text>
                 </Body>
                 {_right}
             </ListItem>
@@ -74,24 +75,11 @@ class WaitingRoom extends React.Component<Props, State> {
     render() {
         const { handleSubmit, valid } = this.props;
         const params = this.props.navigation.state.params || {};
-        const gameType = params.gameType || 'Any';
-        const location = params.location || 'Siam Center';
-        const roomName = params.roomName || 'My room';
-        const min = params.min;
-        const max = params.max || 6;
-        const users = [{
-            name: 'Frowningstick',
-            isReady: true
-        }, {
-            name: 'Slumpfickle',
-            isReady: false
-        },{
-            name: 'CheeseclothAngel',
-            isReady: true
-        },{
-            name: 'Icestoppers',
-            isReady: true
-        }];
+        const gameType = this.props.roomData.gametype;
+        const location = this.props.roomData.location || params.location;
+        const roomName = this.props.roomData.name;
+        const max = this.props.roomData.maxU;
+        const users = this.props.roomData.inusers || [];
 
         return (
             <Container>
@@ -128,7 +116,7 @@ class WaitingRoom extends React.Component<Props, State> {
                         </List>
                     </Card>
                     <Button block rounded success={!this.props.isReady} danger={this.props.isReady} style={styles.submitButton} onPress={() => this.props.onReady()}>
-                        <Text>{this.props.isReady ? 'Unready': 'Ready'}</Text>
+                        <Text>{this.props.isReady ? 'Unready' : 'Ready'}</Text>
                     </Button>
                 </Content>
             </Container>

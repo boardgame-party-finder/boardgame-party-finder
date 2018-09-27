@@ -2,13 +2,13 @@
 import * as React from 'react';
 import CreateRoom from '../../stories/screens/CreateRoom';
 import { connect } from 'react-redux';
-import { createRoom } from './actions';
+import { createRoom, createRoomSuccess, createRoomFailed } from './actions';
 import { Keyboard } from 'react-native'
 import { Toast } from 'native-base';
 
 export interface Props {
     navigation: any,
-    roomData: Object,
+    roomId: number,
     createRoom: Function,
 }
 export interface State { }
@@ -16,7 +16,7 @@ class CreateRoomContainer extends React.Component<Props, State> {
     submit(data: any) {
         Keyboard.dismiss();
         this.props.createRoom(data).then(result => {
-            if (result.payload.status === 200) {
+            if (!this.props.isCreateRoomError) {
                 data._from = 'CreateRoom';
                 this.props.navigation.navigate('WaitingRoom', data);
             } else {
@@ -38,8 +38,18 @@ class CreateRoomContainer extends React.Component<Props, State> {
 
 function bindAction(dispatch) {
     return {
-        createRoom: data => dispatch(createRoom(data))
+        createRoom: data => dispatch(createRoom(data)).then(response => {
+            dispatch(createRoomSuccess(data));
+        })
+        .catch((err) => {
+            dispatch(createRoomFailed(err));
+        })
     };
 }
 
-export default connect(null, bindAction)(CreateRoomContainer);
+const mapStateToProps = state => ({
+    isCreateRoomError: state.createRoomReducer.isCreateRoomError,
+    roomId: state.createRoomReducer.roomId
+});
+
+export default connect(mapStateToProps, bindAction)(CreateRoomContainer);
