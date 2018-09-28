@@ -17,6 +17,7 @@ import styles from './styles';
 export interface Props {
     navigation: any;
     userName: string;
+    onLogout: Function;
 }
 export interface State { }
 class Home extends React.Component<Props, State> {
@@ -27,7 +28,11 @@ class Home extends React.Component<Props, State> {
                     <Body>
                         <Title>Home</Title>
                     </Body>
-                    <Right />
+                    <Right>
+                        <Button transparent light onPress={() => this.props.onLogout()}>
+                            <Text>Logout</Text>
+                        </Button>
+                    </Right>
                 </Header>
                 <Content>
                     <View style={{ alignItems: 'center', paddingTop: 40 }}>
@@ -45,20 +50,6 @@ class Home extends React.Component<Props, State> {
                             </Button>
                         </View>
                     </View>
-
-                    {/* <List>
-            {this.props.list.map((item, i) => (
-              <ListItem
-                key={i}
-                onPress={() =>
-                  this.props.navigation.navigate('BlankPage', {
-                    name: { item }
-                  })}
-              >
-                <Text>{item}</Text>
-              </ListItem>
-            ))}
-          </List> */}
                 </Content>
             </Container>
         );

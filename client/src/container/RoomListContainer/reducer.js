@@ -1,7 +1,8 @@
 const initialState = {
     isLoading: true,
     roomList: [],
-    roomId: null
+    roomId: null,
+    isJoinRoomError: false
 };
 
 export default function (state: any = initialState, action: Function) {
@@ -14,8 +15,28 @@ export default function (state: any = initialState, action: Function) {
             };
         case 'JOIN_ROOM':
             return {
+                ...state
+            };
+        case 'JOIN_ROOM_SUCCESS':
+            return {
                 ...state,
-                roomId: parseInt(action.payload, 10)
+                roomId: action.payload.roomId,
+                isJoinRoomError: false
+            };
+        case 'JOIN_ROOM_FAIL':
+            return {
+                ...state,
+                isJoinRoomError: true
+            };
+        case 'JOIN_ROOM_FAIL':
+            return {
+                ...state,
+                isJoinRoomError: true
+            };
+        case 'CLEAR_ROOMLIST_ROOM_ID':
+            return {
+                ...state,
+                roomId: null
             };
         default:
             return state;

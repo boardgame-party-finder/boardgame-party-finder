@@ -39,6 +39,11 @@ export default function (state: any = initialState, action: Function) {
                 ...state,
                 isReady: !state.isReady
             };
+        case 'CLEAR_READY':
+            return {
+                ...state,
+                isReady: false
+            };
         default :
             return state;
     }

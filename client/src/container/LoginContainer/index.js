@@ -2,8 +2,9 @@
 import * as React from 'react';
 import { Toast } from 'native-base';
 import { connect } from 'react-redux';
-import { login, loginFailed, loginSuccess } from './actions';
+import { login, loginFailed, loginSuccess, setUsername } from './actions';
 import Login from '../../stories/screens/Login';
+import { AsyncStorage } from 'react-native';
 
 export interface Props {
     navigation: any;
@@ -13,9 +14,20 @@ export interface Props {
 export interface State {}
 class LoginContainer extends React.Component<Props, State> {
 
+    componentWillMount() {
+        AsyncStorage.getItem('@boardgame:userName').then(userName => {
+            if (userName) {
+                this.props.setUsername(userName);
+
+                this.props.navigation.navigate('MainScreenNavigator');
+            }
+        });
+    }
+
     onLogin(data) {
         this.props.login(data.userName).then(result => {
             if (!this.props.isError) {
+                AsyncStorage.setItem('@boardgame:userName', data.userName);
                 this.props.navigation.navigate('MainScreenNavigator');
             } else {
                 Toast.show({
@@ -42,7 +54,8 @@ function bindAction(dispatch) {
         })
         .catch((err) => {
             dispatch(loginFailed(err));
-        })
+        }),
+        setUsername: data => dispatch(setUsername(data))
     };
 }
 

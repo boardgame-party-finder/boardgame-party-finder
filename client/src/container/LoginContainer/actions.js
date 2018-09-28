@@ -29,3 +29,10 @@ export function loginFailed(data) {
         payload: data,
     };
 }
+
+export function setUsername(data) {
+    return {
+        type: 'SET_USERNAME',
+        userName: data,
+    };
+}

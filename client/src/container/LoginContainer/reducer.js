@@ -18,6 +18,11 @@ export default function (state: any = initialState, action: Function) {
                 ...state,
                 isError: true
             };
+        case 'SET_USERNAME':
+            return {
+                ...state,
+                userName: action.userName
+            };
         default:
             return state;
     }

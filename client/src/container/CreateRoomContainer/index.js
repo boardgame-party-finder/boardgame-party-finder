@@ -39,7 +39,7 @@ class CreateRoomContainer extends React.Component<Props, State> {
 function bindAction(dispatch) {
     return {
         createRoom: data => dispatch(createRoom(data)).then(response => {
-            dispatch(createRoomSuccess(data));
+            dispatch(createRoomSuccess(response));
         })
         .catch((err) => {
             dispatch(createRoomFailed(err));

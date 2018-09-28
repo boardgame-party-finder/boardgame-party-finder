@@ -21,6 +21,11 @@ export default function (state: any = initialState, action: Function) {
                 ...state,
                 isCreateRoomError: true
             };
+        case 'CLEAR_CREATEROOM_ROOM_ID':
+            return {
+                ...state,
+                roomId: null
+            };
         default:
             return state;
     }

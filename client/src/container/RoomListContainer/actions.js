@@ -11,9 +11,31 @@ export function listRoom() {
     };
 }
 
-export function joinRoom(roomId) {
+export function joinRoom(data) {
+    const request = axios.post(`${ROOT_URL}/dev/join?room=${data.roomId}&user=${data.userName}`);
+
     return {
         type: 'JOIN_ROOM',
-        payload: roomId
+        payload: request
+    };
+}
+
+export function joinRoomSuccess(data) {
+    return {
+        type: 'JOIN_ROOM_SUCCESS',
+        payload: data
+    };
+}
+
+export function joinRoomFail(data) {
+    return {
+        type: 'JOIN_ROOM_FAIL',
+        payload: data
+    };
+}
+
+export function clearRoomListRoomId() {
+    return {
+        type: 'CLEAR_ROOMLIST_ROOM_ID'
     };
 }

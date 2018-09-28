@@ -53,7 +53,7 @@ class WaitingRoom extends React.Component<Props, State> {
             );
         });
 
-        for(let i=0; i < max-users.length; i++) {
+        for(let i=0; i < max-users.length + 1; i++) {
             _users.push(
                 <ListItem icon key={users.length+i}>
                     <Left>
@@ -79,7 +79,7 @@ class WaitingRoom extends React.Component<Props, State> {
         const gameType = roomData.gametype;
         const location = roomData.location || params.location;
         const roomName = roomData.name;
-        const max = roomData.maxU;
+        const max = roomData.max;
         const users = roomData.inusers || [];
 
         return (
@@ -109,6 +109,10 @@ class WaitingRoom extends React.Component<Props, State> {
                             <ListItem icon>
                                 <Left><Icon active name="md-map" /></Left>
                                 <Body><Text>{location}</Text></Body>
+                            </ListItem>
+                            <ListItem icon>
+                                <Left><Icon active name="person" /></Left>
+                                <Body><Text>{users.length - 1 < 0 ? 0 : users.length - 1} / {max || 0}</Text></Body>
                             </ListItem>
                             <Separator bordered>
                                 <Text>Players</Text>

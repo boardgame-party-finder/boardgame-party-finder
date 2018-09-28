@@ -3,7 +3,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import WaitingRoom from '../../stories/screens/WaitingRoom';
 import { Alert } from 'react-native';
-import { toggleReady, initialSetup, initialSetupPassed, initialSetupFailed, getRoomData, getRoomDataPassed, getRoomDataFailed, exitRoom } from './actions';
+import { toggleReady, initialSetup, initialSetupPassed, initialSetupFailed, getRoomData, getRoomDataPassed, getRoomDataFailed, exitRoom, clearReady } from './actions';
+import { clearCreateRoomRoomId } from '../CreateRoomContainer/actions';
+import { clearRoomListRoomId } from '../RoomListContainer/actions';
 export interface Props {
     navigation: any;
     roomId: number;
@@ -17,8 +19,9 @@ class WaitingRoomContainer extends React.Component<Props, State> {
         this.props.initialSetup({
             roomId: this.props.roomId,
             userName: this.props.userName
+        }).then(() => {
+            this.props.getRoomData(this.props.roomId)
         });
-        this.props.getRoomData(this.props.roomId);
     }
 
     componentDidMount() {
@@ -73,7 +76,7 @@ class WaitingRoomContainer extends React.Component<Props, State> {
 const mapStateToProps = state => ({
     isReady: state.waitingRoomReducer.isReady,
     userName: state.loginReducer.userName,
-    roomId: state.createRoomReducer.roomId,
+    roomId: state.listRoomReducer.roomId || state.createRoomReducer.roomId,
     roomData: state.waitingRoomReducer.roomData
 });
 
@@ -81,6 +84,7 @@ function bindAction(dispatch) {
     return {
         initialSetup: data => dispatch(initialSetup(data)).then(response => {
             dispatch(initialSetupPassed(data));
+            dispatch(clearReady());
         }).catch(err => {
             dispatch(initialSetupFailed(err));
         }),
@@ -90,7 +94,11 @@ function bindAction(dispatch) {
             dispatch(getRoomDataFailed(err));
         }),
         toggleReady: data => dispatch(toggleReady(data)),
-        exitRoom: data => dispatch(exitRoom(data))
+        exitRoom: data => {
+            dispatch(exitRoom(data));
+            dispatch(clearCreateRoomRoomId());
+            dispatch(clearRoomListRoomId());
+        }
     }
 };
 

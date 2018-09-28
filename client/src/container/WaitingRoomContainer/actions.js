@@ -65,3 +65,9 @@ export function exitRoom(data) {
         payload: request
     };
 }
+
+export function clearReady(data) {
+    return {
+        type: 'CLEAR_READY'
+    };
+}

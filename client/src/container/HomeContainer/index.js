@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Home from '../../stories/screens/Home';
 import datas from './data';
 import { fetchList } from './actions';
+import { AsyncStorage } from 'react-native';
+
 export interface Props {
 	navigation: any,
 	fetchList: Function,
@@ -11,8 +13,17 @@ export interface Props {
 }
 export interface State {}
 class HomeContainer extends React.Component<Props, State> {
+	onLogout() {
+		AsyncStorage.setItem('@boardgame:userName', '');
+		this.props.navigation.navigate('Login');
+	}
+
 	render() {
-		return <Home navigation={this.props.navigation} userName={this.props.userName} />;
+		return <Home
+			navigation={this.props.navigation}
+			userName={this.props.userName}
+			onLogout={this.onLogout.bind(this)}
+		/>;
 	}
 }
 
