@@ -43,18 +43,20 @@ class RoomList extends React.Component<Props, State> {
                 <Content padder>
                     <Card>
                     <List dataArray={this.props.roomList}
-                        renderRow={(room) =>
-                        <ListItem>
-                            <Body>
-                                <Text>{room.name ? room.name : 'Just for Fun !!'} ({room.inusers ? room.inusers.length - 1 : 0}/{room.max})</Text>
-                                <Text note>Type: {room.gametype ? room.gametype : 'Any' }</Text>
-                            </Body>
-                            <Right>
-                            <Button rounded success onPress={() => this.props.onJoinRoom(room)}>
-                                <Text>Join</Text>
-                            </Button>
-                            </Right>
-                        </ListItem>
+                        renderRow={(room) => {
+                            if (room.inusers.length === 1) return null;
+                            return <ListItem>
+                                <Body>
+                                    <Text>{room.name ? room.name : 'Just for Fun !!'} ({room.inusers ? room.inusers.length - 1 : 0}/{room.max})</Text>
+                                    <Text note>Type: {room.gametype ? room.gametype : 'Any'}</Text>
+                                </Body>
+                                <Right>
+                                    <Button rounded success onPress={() => this.props.onJoinRoom(room)}>
+                                        <Text>Join</Text>
+                                    </Button>
+                                </Right>
+                            </ListItem>
+                        }
                         }>
                     </List>
                     </Card>
