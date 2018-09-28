@@ -3,7 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import WaitingRoom from '../../stories/screens/WaitingRoom';
 import { Alert } from 'react-native';
-import { toggleReady, initialSetup, initialSetupPassed, initialSetupFailed, getRoomData, getRoomDataPassed, getRoomDataFailed, exitRoom, clearReady } from './actions';
+import { toggleReady, getRoomData, getRoomDataPassed, getRoomDataFailed, exitRoom, clearReady } from './actions';
 import { clearCreateRoomRoomId } from '../CreateRoomContainer/actions';
 import { clearRoomListRoomId } from '../RoomListContainer/actions';
 export interface Props {
@@ -16,12 +16,8 @@ export interface Props {
 export interface State { }
 class WaitingRoomContainer extends React.Component<Props, State> {
     componentWillMount() {
-        this.props.initialSetup({
-            roomId: this.props.roomId,
-            userName: this.props.userName
-        }).then(() => {
-            this.props.getRoomData(this.props.roomId)
-        });
+        this.props.clearReady();
+        this.props.getRoomData(this.props.roomId)
     }
 
     componentDidMount() {
@@ -82,18 +78,13 @@ const mapStateToProps = state => ({
 
 function bindAction(dispatch) {
     return {
-        initialSetup: data => dispatch(initialSetup(data)).then(response => {
-            dispatch(initialSetupPassed(data));
-            dispatch(clearReady());
-        }).catch(err => {
-            dispatch(initialSetupFailed(err));
-        }),
         getRoomData: data => dispatch(getRoomData(data)).then(response => {
             dispatch(getRoomDataPassed(data));
         }).catch(err => {
             dispatch(getRoomDataFailed(err));
         }),
         toggleReady: data => dispatch(toggleReady(data)),
+        clearReady: () => dispatch(clearReady()),
         exitRoom: data => {
             dispatch(exitRoom(data));
             dispatch(clearCreateRoomRoomId());

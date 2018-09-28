@@ -40,3 +40,14 @@ export function clearCreateRoomRoomId(data) {
         payload: data,
     };
 }
+
+export function initialSetup(data) {
+    const request = axios.post(`${ROOT_URL}/dev/join?room=${data.roomId}&user=${data.userName}`);
+
+    console.log('join initial setup');
+
+    return {
+        type: 'INITIAL_SETUP',
+        payload: request,
+    };
+}

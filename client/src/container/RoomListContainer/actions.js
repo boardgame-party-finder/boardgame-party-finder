@@ -14,6 +14,8 @@ export function listRoom() {
 export function joinRoom(data) {
     const request = axios.post(`${ROOT_URL}/dev/join?room=${data.roomId}&user=${data.userName}`);
 
+    console.log('join room list')
+
     return {
         type: 'JOIN_ROOM',
         payload: request

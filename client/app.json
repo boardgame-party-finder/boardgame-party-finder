@@ -1,10 +1,10 @@
 {
   "expo": {
     "sdkVersion": "24.0.0",
-    "slug": "React-Native-Seed",
+    "slug": "Boardgame-Party-Finder",
     "loading": {
       "hideExponentText": false,
-      "icon": "./assets/loading.png"
+      "icon": "./assets/logo.png"
     },
     "orientation": "portrait",
     "primaryColor": "#cccccc",

@@ -46,7 +46,7 @@ class RoomList extends React.Component<Props, State> {
                         renderRow={(room) =>
                         <ListItem>
                             <Body>
-                                <Text>{room.name ? room.name : 'Just for Fun !!'} ({room.inusers ? room.inusers.length : 0}/{room.max})</Text>
+                                <Text>{room.name ? room.name : 'Just for Fun !!'} ({room.inusers ? room.inusers.length - 1 : 0}/{room.max})</Text>
                                 <Text note>Type: {room.gametype ? room.gametype : 'Any' }</Text>
                             </Body>
                             <Right>
