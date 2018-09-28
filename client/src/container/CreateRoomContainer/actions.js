@@ -10,7 +10,7 @@ export function createRoom(data: any) {
         Name: data.roomName,
         Max: parseInt(data.max, 10),
         Min: 2,
-        // Location: data.location
+        Location: data.location
     };
     const request = axios.post(`${ROOT_URL}/dev/room`, reqPayload);
 
