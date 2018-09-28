@@ -36,3 +36,8 @@ type GetUserInfo struct {
 	Name  string `json:"name"`
 	Ready bool   `json:"ready"`
 }
+
+type UserKey struct {
+	TbN string `json:"TbN"`
+	PK  string `json:"PK"`
+}

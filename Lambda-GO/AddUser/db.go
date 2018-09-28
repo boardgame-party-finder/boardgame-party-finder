@@ -25,9 +25,8 @@ func createUser(userData User) (string, error) {
 	fmt.Println("item = ", item)
 
 	input := &dynamodb.PutItemInput{
-		Item:                item,
-		TableName:           aws.String(table),
-		ConditionExpression: aws.String("attribute_not_exists(PK)"),
+		Item:      item,
+		TableName: aws.String(table),
 	}
 
 	_, err = db.PutItem(input)

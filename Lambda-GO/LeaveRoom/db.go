@@ -82,6 +82,29 @@ func leaveRoom(roomNumber string, user string) (string, error) {
 		result = "false"
 	}
 
+	key2, err2 := dynamodbattribute.MarshalMap(UserKey{
+		"user",
+		user})
+	if err2 != nil {
+		fmt.Println("Error in mashal user data")
+		return "failed", err2
+	}
+
+	input2 := &dynamodb.UpdateItemInput{
+		Key:              key2,
+		TableName:        aws.String(table),
+		UpdateExpression: aws.String("REMOVE #CurrentRoom"),
+		ExpressionAttributeNames: map[string]*string{
+			"#CurrentRoom": aws.String("CurrentRoom"),
+		},
+		ReturnValues: aws.String("NONE")}
+
+	_, err2 = db.UpdateItem(input2)
+	if err != nil {
+		fmt.Println(err.Error())
+		return "failed", err
+	}
+
 	return result, err1
 
 }

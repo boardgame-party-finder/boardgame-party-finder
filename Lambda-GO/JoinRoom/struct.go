@@ -26,6 +26,11 @@ type RoomKey struct {
 	PK  string `json:"PK"`
 }
 
+type UserKey struct {
+	TbN string `json:"TbN"`
+	PK  string `json:"PK"`
+}
+
 type UserInfo struct {
 	ID    string `json:"id"`
 	Name  string `json:"name"`

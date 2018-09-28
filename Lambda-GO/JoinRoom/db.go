@@ -74,6 +74,32 @@ func joinRoom(roomNumber string, user string) (string, error) {
 		return "failed", err
 	}
 
+	key2, err2 := dynamodbattribute.MarshalMap(UserKey{
+		"user",
+		user})
+	if err2 != nil {
+		fmt.Println("Error in mashal user data")
+		return "failed", err2
+	}
+
+	input2 := &dynamodb.UpdateItemInput{
+		Key:              key2,
+		TableName:        aws.String(table),
+		UpdateExpression: aws.String("SET #CurrentRoom = :userInfo"),
+		ExpressionAttributeNames: map[string]*string{
+			"#CurrentRoom": aws.String("CurrentRoom"),
+		},
+		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+			":userInfo": {S: aws.String(roomNumber)},
+		},
+		ReturnValues: aws.String("UPDATED_NEW")}
+
+	_, err2 = db.UpdateItem(input2)
+	if err != nil {
+		fmt.Println(err.Error())
+		return "failed", err
+	}
+
 	return result, err
 
 }

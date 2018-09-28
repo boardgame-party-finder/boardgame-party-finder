@@ -12,8 +12,9 @@ type Lobby struct {
 	PK       string        `json:"pk"`
 	GameType string        `json:"gametype"`
 	Name     string        `json:"name"`
-	Max      int64         `json:"maxU"`
+	Max      int64         `json:"max"`
 	Min      int64         `json:"min"`
+	Location string        `json:"Location"`
 	InUsers  []GetUserInfo `json:"inusers"`
 }
 

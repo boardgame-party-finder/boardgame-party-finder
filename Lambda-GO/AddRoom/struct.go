@@ -18,6 +18,7 @@ type Lobby struct {
 	Name     string `json:"Name"`
 	Max      int64  `json:"Max"`
 	Min      int64  `json:"Min"`
+	Location string `json:"Location"`
 }
 
 type RoomUser struct {

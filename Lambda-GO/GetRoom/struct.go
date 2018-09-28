@@ -18,6 +18,7 @@ type Lobby struct {
 	Name     string        `json:"name"`
 	Max      int64         `json:"max"`
 	Min      int64         `json:"min"`
+	Location string        `json:"Location"`
 	InUsers  []GetUserInfo `json:"inusers"`
 }
 
