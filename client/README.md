@@ -1,10 +1,10 @@
+# Boardgame Party Finder
 
-## React Native Seed v1.0.0
 
+## Project Technology Brief
 ### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [NativeBase](https://nativebase.io/) + [React Navigation](https://reactnavigation.org/) + [Redux](https://github.com/reactjs/redux) Apps (iOS & Android)
 
-*Brought to you by [GeekyAnts](https://geekyants.com/)*
-
+*Project boilerplates by React Native Seed*
 
 ## Get Started
 
@@ -20,9 +20,9 @@
 On the command prompt run the following commands
 
 ```sh
-$ git clone https://github.com/GeekyAnts/react-native-boilerplate-redux-flow.git
+$ git clone https://github.com/boardgame-party-finder/boardgame-party-finder.git
 
-$ cd react-native-boilerplate-redux-flow/
+$ cd boardgame-party-finder/
 
 $ npm install
   or
